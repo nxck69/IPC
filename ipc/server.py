@@ -6,6 +6,8 @@ from typing import Any, Coroutine, Callable, TypedDict
 import aiohttp
 from aiohttp import web, web_request
 
+RequestPayloadData = dict[str, Any]
+
 
 class RequestHeaders(TypedDict):
     Authorization: str
@@ -13,14 +15,14 @@ class RequestHeaders(TypedDict):
 
 class RequestPayload(TypedDict):
     endpoint: str
-    data: dict[str, Any]
+    data: RequestPayloadData
     headers: RequestHeaders
     nonce: str
 
 
 @dataclass(slots=True)
 class Context:
-    data: RequestPayload
+    data: RequestPayloadData
     endpoint: str
 
 
